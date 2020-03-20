@@ -1,29 +1,29 @@
-Sending a simple event telemetry item
+#Sending a simple event telemetry item
 
 from applicationinsights import TelemetryClient
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
 tc.track_event('Test event')
 tc.flush()
-Sending an event telemetry item with custom properties and measurements
 
+#Sending an event telemetry item with custom properties and measurements
 from applicationinsights import TelemetryClient
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
 tc.track_event('Test event', { 'foo': 'bar' }, { 'baz': 42 })
 tc.flush()
-Sending a trace telemetry item with custom properties
 
+#Sending a trace telemetry item with custom properties
 from applicationinsights import TelemetryClient
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
 tc.track_trace('Test trace', { 'foo': 'bar' })
 tc.flush()
-Sending a metric telemetry item
 
+#Sending a metric telemetry item
 from applicationinsights import TelemetryClient
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
 tc.track_metric('My Metric', 42)
 tc.flush()
-Sending an exception telemetry item with custom properties and measurements
 
+#Sending an exception telemetry item with custom properties and measurements
 import sys
 from applicationinsights import TelemetryClient
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
@@ -50,15 +50,16 @@ tc.context.user.id = 'santa@northpole.net'
 tc.context.properties['my_property'] = 'my_value'
 tc.track_trace('My trace with context')
 tc.flush()
-Establishing correlation between telemetry objects
 
-context field called operation_id can be set to associate telemetry items. Since operation_id is being set as a property of telemetry client, the client shouldn't be reused in parallel threads as it might lead to concurrency issues.
+#Establishing correlation between telemetry objects
+#context field called operation_id can be set to associate telemetry items. Since operation_id is being set as a property of telemetry client, the client shouldn't be reused in parallel threads as it might lead to concurrency issues.
 
 tc = TelemetryClient(instrumentation_key=instrumentation_key)
 tc.context.operation.id = <operation_id>
 tc.track_trace('Test trace')
 tc.flush()
-Configuring channel related properties
+
+#Configuring channel related properties
 
 from applicationinsights import TelemetryClient
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
@@ -66,7 +67,8 @@ tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
 tc.channel.sender.send_interval_in_milliseconds = 30 * 1000
 # flush telemetry if we have 10 or more telemetry items in our queue
 tc.channel.queue.max_queue_length = 10
-Configuring TelemetryProcessor
+
+#Configuring TelemetryProcessor
 
 from applicationinsights import TelemetryClient
 def process(data, context):
@@ -75,7 +77,8 @@ def process(data, context):
    return True # Not filtered
 tc = TelemetryClient('<YOUR INSTRUMENTATION KEY GOES HERE>')
 tc.add_telemetry_processor(process)
-Basic logging configuration (first option)
+
+#Basic logging configuration (first option)
 
 import logging
 from applicationinsights.logging import enable
